@@ -52,11 +52,13 @@ const LoginForm = () => {
       autoComplete="off"
     >
       <Input
+        type="text"
         name={FORM.EMAIL.NAME}
         placeholder={FORM.EMAIL.PLACEHOLDER}
         rules={formRules}
       />
       <Input
+        type="password"
         name={FORM.PASSWORD.NAME}
         placeholder={FORM.PASSWORD.PLACEHOLDER}
         rules={formRules}
