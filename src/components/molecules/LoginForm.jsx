@@ -4,7 +4,6 @@ import Input from "../atoms/input";
 import CONSTANTS from "../../helpers/constants";
 import ButtonLink from "../atoms/ButtonLink";
 import OAuthButton from "../atoms/OAuthButton";
-import GoogleIcon from "../../assets/google.svg";
 import Button from "../atoms/Button";
 import { SHA256 } from "crypto-js";
 import { useNavigate, createSearchParams } from "react-router-dom";
@@ -67,11 +66,7 @@ const LoginForm = () => {
         <ButtonLink label="Forgot Password?" to={pages.auth.forgotPassword} />
       </div>
       <div className=" mt-5">
-        <OAuthButton
-          icon={GoogleIcon}
-          label="Continue with Google"
-          onClick={() => {}}
-        />
+        <OAuthButton />
       </div>
       <div className="mt-[30px] flex w-full justify-center items-center">
         <Button label="Login" type="submit" />

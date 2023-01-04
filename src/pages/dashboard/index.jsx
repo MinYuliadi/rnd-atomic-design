@@ -1,15 +1,9 @@
 import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import pages from "../../config/pages";
-import isTokenValid from "../../utils/isTokenValid";
+import getTokenData from "../../utils/getTokenData";
 
 const Dashboard = () => {
-  const navigate = useNavigate();
-
-  const valid = isTokenValid();
-
   useEffect(() => {
-    if (!valid) return navigate(pages.index);
+    console.log(getTokenData());
   }, []);
 
   return (
