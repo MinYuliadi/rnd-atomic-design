@@ -5,12 +5,13 @@ import CONSTANTS from "../../helpers/constants";
 import ButtonLink from "../atoms/ButtonLink";
 import OAuthButton from "../atoms/OAuthButton";
 import Button from "../atoms/Button";
-import { SHA256 } from "crypto-js";
-import { useNavigate, createSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import pages from "../../config/pages";
 import state from "../../config/state";
+import api from "../../config/api";
+import callApi, { getOptions } from "../../utils/callApi";
 
-const { FORM, SECRET_TOKEN } = CONSTANTS;
+const { FORM } = CONSTANTS;
 
 const formRules = [
   {
@@ -23,20 +24,23 @@ const LoginForm = () => {
   const [form] = Form.useForm();
   const navigate = useNavigate();
 
-  const onSuccess = (values) => {
+  const onSuccess = async (values) => {
     const body = {
       [FORM.EMAIL.NAME]: values[FORM.EMAIL.NAME],
       [FORM.PASSWORD.NAME]: values[FORM.PASSWORD.NAME],
     };
 
-    const encrypted = SHA256(JSON.stringify(body), SECRET_TOKEN).toString();
+    const options = {
+      method: "POST",
+      body,
+    };
 
-    sessionStorage.setItem(state.TOKEN, encrypted);
+    const response = await callApi(api.login, getOptions(options));
 
-    navigate({
-      pathname: pages.dashboard,
-      search: `?${createSearchParams(body)}`,
-    });
+    if (!response.access_token) return alert(response);
+
+    sessionStorage.setItem(state.TOKEN, response.access_token);
+    navigate(pages.dashboard);
   };
 
   const onFailed = (values) => {

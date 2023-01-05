@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import Header from "../../components/organisms/Header";
 import getTokenData from "../../utils/getTokenData";
 
 const Dashboard = () => {
@@ -8,6 +9,7 @@ const Dashboard = () => {
 
   return (
     <>
+      <Header />
       <div>this is dashboard</div>
     </>
   );
